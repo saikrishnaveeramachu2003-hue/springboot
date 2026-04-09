@@ -23,7 +23,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 bat '''
-                docker run -d -p 2003:2003 springboot-app
+                docker run -d -p 2003:8080 springboot-app
                 '''
             }
         }
