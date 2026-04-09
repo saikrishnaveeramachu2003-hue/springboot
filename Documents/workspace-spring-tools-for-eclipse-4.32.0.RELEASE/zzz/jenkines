@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Clone Code') {
+            steps {
+                git 'https://github.com/saikrishnaveeramachu2003-hue/springboot.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '''
+                cd Documents\\workspace-spring-tools-for-eclipse-4.32.0.RELEASE\\zzz
+                mvnw.cmd clean package
+                '''
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat '''
+                cd Documents\\workspace-spring-tools-for-eclipse-4.32.0.RELEASE\\zzz
+                docker build -t springboot-app .
+                '''
+            }
+        }
+
+        stage('Run Docker Container') {
+            steps {
+                bat '''
+                docker run -d -p 2003:2003 springboot-app
+                '''
+            }
+        }
+
+    }
+}
