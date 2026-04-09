@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class controller {
 	@GetMapping("/welcome")
 	public String getmessage() {
-		return "welcome to docker hub";
+		return "welcome to docker hub pora puka";
 	}
 
 }
