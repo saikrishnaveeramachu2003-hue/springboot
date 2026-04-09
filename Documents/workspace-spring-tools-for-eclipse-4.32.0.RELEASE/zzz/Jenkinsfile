@@ -10,5 +10,24 @@ pipeline {
                 '''
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                bat '''
+                cd Documents\\workspace-spring-tools-for-eclipse-4.32.0.RELEASE\\zzz
+                docker build -t springboot-app .
+                '''
+            }
+        }
+
+        // (Optional next stage)
+        stage('Run Docker Container') {
+            steps {
+                bat '''
+                docker run -d -p 2003:2003 springboot-app
+                '''
+            }
+        }
+
+    
     }
 }
